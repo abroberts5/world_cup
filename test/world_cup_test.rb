@@ -21,7 +21,33 @@ class WorldCupTest < Minitest::Test
     assert_equal [france, croatia], world_cup.teams
   end
 
-  def test_
+  def test_it_can_find_all_players
+    france = Team.new("France")
+    croatia = Team.new("Croatia")
+    mbappe = Player.new("Kylian Mbappe", :forward)
+    griezmann = Player.new("Antoine Griezmann", :forward)
+    pogba = Player.new("Paul Pogba", :midfielder)
+    modric = Player.new("Luka Modric", :midfielder)
+    perisic = Player.new("Ivan Perisic", :forward)
+    vida = Player.new("Domagoj Vida", :defender)
+    world_cup = WorldCup.new(2018, [france, croatia])
+
+    france.add_player(mbappe)
+    france.add_player(griezmann)
+    france.add_player(pogba)
+    croatia.add_player(modric)
+    croatia.add_player(perisic)
+    croatia.add_player(vida)
+
+    assert world_cup.find_all_players.include?(vida)
+    assert world_cup.find_all_players.include?(perisic)
+    assert world_cup.find_all_players.include?(modric)
+    assert world_cup.find_all_players.include?(pogba)
+    assert world_cup.find_all_players.include?(griezmann)
+    assert world_cup.find_all_players.include?(mbappe)
+  end
+
+  def test_player_by_position_works
     france = Team.new("France")
     croatia = Team.new("Croatia")
     mbappe = Player.new("Kylian Mbappe", :forward)
@@ -40,7 +66,7 @@ class WorldCupTest < Minitest::Test
     croatia.add_player(vida)
 
     assert_equal [mbappe, griezmann, perisic], world_cup.active_players_by_position(:forward)
-    assert_equal true, croatia.eliminated
+    croatia.eliminate
     assert_equal [mbappe, griezmann], world_cup.active_players_by_position(:forward)
   end
 end

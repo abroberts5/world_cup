@@ -22,7 +22,7 @@ class TeamTest < Minitest::Test
   def test_eliminated_methods_?
     france = Team.new("France")
     assert_equal false, france.eliminated?
-    assert_equal true, france.eliminated
+    france.eliminate
     assert_equal true, france.eliminated?
   end
 

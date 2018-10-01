@@ -13,7 +13,7 @@ class Team
     @eliminated
   end
 
-  def eliminated
+  def eliminate
     @eliminated = true
   end
 
