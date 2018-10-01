@@ -48,7 +48,6 @@ class WorldCupTest < Minitest::Test
   end
 
   def test_player_by_position_works
-    skip
     france = Team.new("France")
     croatia = Team.new("Croatia")
     mbappe = Player.new("Kylian Mbappe", :forward)
@@ -67,7 +66,7 @@ class WorldCupTest < Minitest::Test
     croatia.add_player(vida)
 
     assert_equal [mbappe, griezmann, perisic], world_cup.active_players_by_position(:forward)
-    assert_equal true, croatia.eliminated
+    croatia.eliminate
     assert_equal [mbappe, griezmann], world_cup.active_players_by_position(:forward)
   end
 end
